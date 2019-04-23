@@ -1,7 +1,5 @@
 # Qubes-LogVM
-Qubes LogVM - PoC
-
-This is a Proof of Concent project, implementing a central log collecting LogVM for Qubes OS.
+This is a Proof of Concent project, implementing a central log collector (LogVM) for Qubes OS.
 
 ## Preparation
 Read the [docuemntation](https://www.qubes-os.org/doc/qrexec3/) about qrexec
@@ -11,6 +9,7 @@ Read the [docuemntation](https://www.qubes-os.org/doc/qrexec3/) about qrexec
 - Create a LogVM 
 
   Choose a nice name like: "sys-log" :)
+  
   (2vCPU, 256/512 RAM, and a reasonable amount of private storage)
 
 - Qubes RPC
@@ -41,7 +40,7 @@ Read the [docuemntation](https://www.qubes-os.org/doc/qrexec3/) about qrexec
   tail -f /tmp/syslog
   ```
 
-**WARNING**: this is just to see if it's working. 
+**WARNING**: this is just a simple exaple, to see if the solution is working.
 
 If it is, You will receive all the logs from all the VM's into a single file. But that file will be lost if you reboot your LogVM.
 
@@ -52,7 +51,7 @@ If it is, You will receive all the logs from all the VM's into a single file. Bu
   
 ### Log Source
   
-  The log source can be any VM (qube) inside your Qubes OS. In case of Debian/Fedora, the default system logger is the `systemd-journald` service. Journald is just a workaround for the desktop users, and it is not prepared for sending logs to a central log collector, so we need a real log manager application: 
+The log source can be any VM (qube) inside your Qubes OS. In case of Debian/Fedora, the default system logger is the `systemd-journald` service. Journald is just a workaround for the desktop users, and it is not prepared for sending logs to a central log collector, so we need a real log manager application: 
   
 - install the 'syslog-ng' package (and it's dependecies)
 - create a [config file](syslog-ng.conf) for syslog-ng
@@ -65,7 +64,7 @@ If it is, You will receive all the logs from all the VM's into a single file. Bu
 - restart the systemd-journald service
 - (re)start the syslog-ng service
 
-**WARNING**: If you do the modification in a running AppVM, you will loose all after rebooting the VM. If you do te modification in a template, all your VM's based on that template will affected.
+**WARNING**: If you do the modification in a running AppVM, you will loose all after rebooting the VM. If you do the modification in a template, all your VM's (based on that template) will be affected.
 
 
 After this stage, you should see all the logs in sys-log VM :)
